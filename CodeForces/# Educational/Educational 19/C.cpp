@@ -1,0 +1,70 @@
+/*************************************************************************
+    > File Name: test.cpp
+    > Author: Akira 
+    > Mail: qaq.febr2.qaq@gmail.com 
+ ************************************************************************/
+
+#include<bits/stdc++.h>
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef long double LD;
+#define MST(a,b) memset(a,b,sizeof(a))
+#define CLR(a) MST(a,0)
+#define Sqr(a) ((a)*(a))
+using namespace std;
+
+#define MaxN 100001
+#define MaxM MaxN*10
+#define INF 0x3f3f3f3f
+#define PI 3.1415926535897932384626
+const int mod = 1E9+7;
+const double eps = 1e-6;
+#define bug cout<<88888888<<endl;
+#define debug(x) cout << #x" = " << x << endl;
+
+char str[MaxN];
+int num[30];
+bool find(int x)
+{
+    for(int i=0;i<x;i++)
+    {
+        if(num[i]) return true;
+    }
+    return false;
+}
+int main()
+{
+    //std::ios::sync_with_stdio(false);
+    while(~scanf("%s", str))
+    {     
+        CLR(num);
+        stack<int> S;
+        int len = strlen(str);
+        for(int i=0;i<len;i++) num[str[i]-'a']++;
+        for(int i=0;i<len;i++)
+        {
+            if(S.empty())
+            {
+                S.push((int)str[i]);
+                num[str[i]-'a']--;
+            }
+            else
+            {
+                while(!S.empty() && str[i]>=(char)S.top() && !find(S.top()-(int)'a') )
+                {
+                    putchar((char)S.top());
+                    S.pop();
+                }
+                S.push((int)str[i]);
+                num[str[i]-'a']--;
+            }
+        }
+        while(!S.empty())
+        {
+            putchar((char)S.top());
+            S.pop();
+        }
+        puts("");
+    }
+    //system("pause");
+}
