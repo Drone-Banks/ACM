@@ -1,2 +1,2 @@
-# ACM-
+# ACM
 problem bank
